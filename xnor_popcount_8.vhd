@@ -34,7 +34,8 @@ component Popcount_8
 
    -- this is where we store xnor results
 	signal xnor_0,xnor_1,xnor_2,xnor_3,xnor_4,xnor_5,xnor_6,xnor_7 : std_logic_vector(7 downto 0);
-  
+  	
+	signal s_0,s_1,s_2,s_3,s_4,s_5,s_6,s_7 :std_logic_vector(31 downto 0);
 begin
 
    -- compute xnor results
@@ -65,14 +66,24 @@ begin
 	nn_out(6)(15 downto 0) <= x"0000";
 	nn_out(7)(15 downto 0) <= x"0000";
 	
+	s_0 <= x"00" & xnor_0 & x"0000";
+	s_1 <= x"00" & xnor_1 & x"0000";
+	s_2 <= x"00" & xnor_2 & x"0000";
+	s_3 <= x"00" & xnor_3 & x"0000";
+	s_4 <= x"00" & xnor_4 & x"0000";
+	s_5 <= x"00" & xnor_5 & x"0000";
+	s_6 <= x"00" & xnor_6 & x"0000";
+	s_7 <= x"00" & xnor_7 & x"0000";
+
+
 	-- compute popcount of xnor results. Note that we are storing output as 32 bit fixed point 16,16
-	pop0: Popcount_8 PORT MAP (input_vector => x"00" & xnor_0 & x"0000" , count => nn_out(0)(23 downto 16));
-   pop1: Popcount_8 PORT MAP (input_vector => x"00" & xnor_1 & x"0000" , count => nn_out(1)(23 downto 16));
-	pop2: Popcount_8 PORT MAP (input_vector => x"00" & xnor_2 & x"0000" , count => nn_out(2)(23 downto 16));
-	pop3: Popcount_8 PORT MAP (input_vector => x"00" & xnor_3 & x"0000" , count => nn_out(3)(23 downto 16));
-	pop4: Popcount_8 PORT MAP (input_vector => x"00" & xnor_4 & x"0000" , count => nn_out(4)(23 downto 16));
-	pop5: Popcount_8 PORT MAP (input_vector => x"00" & xnor_5 & x"0000" , count => nn_out(5)(23 downto 16));
-	pop6: Popcount_8 PORT MAP (input_vector => x"00" & xnor_6 & x"0000" , count => nn_out(6)(23 downto 16));
-	pop7: Popcount_8 PORT MAP (input_vector => x"00" & xnor_7 & x"0000" , count => nn_out(7)(23 downto 16));
+	pop0: Popcount_8 PORT MAP (input_vector => s_0 , count => nn_out(0)(23 downto 16));
+  	pop1: Popcount_8 PORT MAP (input_vector =>s_1 , count => nn_out(1)(23 downto 16));
+	pop2: Popcount_8 PORT MAP (input_vector => s_2 , count => nn_out(2)(23 downto 16));
+	pop3: Popcount_8 PORT MAP (input_vector => s_3 , count => nn_out(3)(23 downto 16));
+	pop4: Popcount_8 PORT MAP (input_vector => s_4 , count => nn_out(4)(23 downto 16));
+	pop5: Popcount_8 PORT MAP (input_vector => s_5 , count => nn_out(5)(23 downto 16));
+	pop6: Popcount_8 PORT MAP (input_vector =>s_6, count => nn_out(6)(23 downto 16));
+	pop7: Popcount_8 PORT MAP (input_vector => s_7 , count => nn_out(7)(23 downto 16));
 	
 end Behavioral;
